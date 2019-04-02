@@ -1,0 +1,7 @@
+#CardDisplay
+{
+    position: absolute;
+    width : 95%;
+    transform : translate(3%, 3%);
+    background : rgba(240, 234, 234, 0.9);
+  }
