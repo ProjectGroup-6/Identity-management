@@ -28,7 +28,7 @@ text-decoration: black;
   width: auto;
   margin-top: 10px;
   background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(31, 29, 29, 0.8);
 }
 #Background{
   background-color: rgba(0,0,0,0);

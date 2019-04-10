@@ -42,7 +42,7 @@ class Login extends React.Component{
         </form>
     </Card>
 
-    <Popup trigger={<button> Trigger</button>} position="right center">
+    {/* <Popup trigger={<button> Trigger</button>} position="right center">
     <div>
     <Card id="a">
   <form method="">
@@ -60,7 +60,7 @@ class Login extends React.Component{
     </form>
   </Card>
     </div>
-  </Popup>
+  </Popup> */}
 
   </div>
     );
