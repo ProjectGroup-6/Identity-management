@@ -1,7 +1,7 @@
-
-
 import React, { Component } from "react"
-import Main from "./components/main"
+import Home from "./components/Home"
+import "./components/test.css"
+
 
 class App extends Component{
   
@@ -9,8 +9,9 @@ class App extends Component{
     
     return(
       <div className="bg-img">
-        <Main/>
-          
+            
+            <Home selectList = {{selectedOption : 'Admin',options: ['Admin', 'Student']}}/> 
+           
       </div>
     )
   }
