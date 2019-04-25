@@ -1,14 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import './components/index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Login from './components/Login';
 import Sample from './components/Sample';
 import './components/Sample.css'
-import PersonalCard1 from './components/Personal1';
-import Student1 from './components/Student1';
+
 
 ReactDOM.render(<Sample />, document.getElementById('root'));
 

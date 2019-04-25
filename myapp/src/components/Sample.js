@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import App1 from './App1'
 import './Sample.css'
+import StudHome from "./StudentHome"
 
 class Sample extends Component {
   constructor() {
@@ -15,8 +16,12 @@ class Sample extends Component {
   }
 
   homeClick(event){
-    ReactDOM.render(<App1/>,document.getElementById('root'))
+    ReactDOM.render(<App1 />,document.getElementById('root'))
   }
+
+  StudHome(event){
+   ReactDOM.render(<StudHome />,document.getElementById('root'))
+ }
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -40,6 +45,8 @@ class Sample extends Component {
                       <input id='firstname' name='UserName' placeholder='UserName' type='text'/>
                       <input id='phone' name='Password' placeholder='Password' type='password'/>
                       <button type="submit" className="btn btn-primary" onClick={this.homeClick}>Submit</button>
+                      <button type="submit" className="btn btn-primary" onClick={this.StudHome}>Login</button>
+
                     </form> 
               </div>
         </div>
@@ -52,3 +59,8 @@ class Sample extends Component {
 
 
 	
+
+
+
+
+

@@ -1,40 +1,37 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom'
-import Home from './components/Home'
-import Login from './components/Login'
+
 import './components/App.css';
 import {Row, Input, Button} from 'react-materialize'
 import {Navbar,NavItem,Dropdown} from 'react-materialize'
 import {SideNav,SideNavItem} from 'react-materialize'
-import PersonalCard from './components/Personal';
-import EducationalCard from './components/Educational';
-import Student from './components/student'
+
 
 
 class App extends React.Component{
-   constructor(){
-      super()
-      this.personalClick=this.personalClick.bind(this)
-      this.educationalClick=this.educationalClick.bind(this)
-      this.backClick=this.backClick.bind(this)  
-      this.StudentClick=this.StudentClick.bind(this)  
-   }
+  //  constructor(){
+  //     super()
+  //     this.personalClick=this.personalClick.bind(this)
+  //     this.educationalClick=this.educationalClick.bind(this)
+  //     this.backClick=this.backClick.bind(this)  
+  //     this.StudentClick=this.StudentClick.bind(this)  
+  //  }
 
-   backClick(event){
-      ReactDOM.render(<Login/>,document.getElementById('root'))
-    }
+  //  backClick(event){
+  //     ReactDOM.render(<Login/>,document.getElementById('root'))
+  //   }
 
-   personalClick(event){
-      ReactDOM.render(<PersonalCard/>,document.getElementById('root'))
-   } 
+  //  personalClick(event){
+  //     ReactDOM.render(<PersonalCard/>,document.getElementById('root'))
+  //  } 
 
-   educationalClick(event){
-      ReactDOM.render(<EducationalCard/>,document.getElementById('root'))
-   }
+  //  educationalClick(event){
+  //     ReactDOM.render(<EducationalCard/>,document.getElementById('root'))
+  //  }
 
-   StudentClick(event){
-      ReactDOM.render(<Student/>,document.getElementById('root'))
-    }
+  //  StudentClick(event){
+  //     ReactDOM.render(<Student/>,document.getElementById('root'))
+  //   }
 
 
  render(){

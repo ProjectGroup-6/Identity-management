@@ -23,37 +23,6 @@ class App1 extends Component{
               <div id="background">
                   <nav id="Color" class="navbar" role="navigation" aria-label="main navigation">
                     <div  class="navbar-menu">
-                        {/* <div class="navbar-start">
-                        <a class="navbar-item-white">
-                            Home
-                        </a>
-
-                        <a class="navbar-item-white">
-                            Documentation
-                        </a>
-
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                            More
-                            </a>
-
-                            <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                About
-                            </a>
-                            <a class="navbar-item">
-                                Jobs
-                            </a>
-                            <a class="navbar-item">
-                                Contact
-                            </a>
-                            <hr class="navbar-divider" />
-                            <a class="navbar-item">
-                                Report an issue
-                            </a>
-                            </div>
-                        </div>
-                        </div> */}
                         <div class="navbar-end">
                         <div class="navbar-item">
                             <div class="buttons">
@@ -68,9 +37,6 @@ class App1 extends Component{
                     
                     <div id="Size">
                     <aside class="menu">
-                        {/* <p class="menu-label">
-                            General
-                        </p> */}
                         <ul class="menu-list">
                             <li><a class="is-active grey">Home</a></li>
                             <hr class="navbar-divider" />
