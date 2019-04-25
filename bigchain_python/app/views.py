@@ -5,22 +5,50 @@ from bigchaindb_driver import BigchainDB
 from bigchaindb_driver.crypto import generate_keypair
 import json,sys
 from werkzeug.utils import secure_filename
-from app.mysql import student_data_store
+from app.mysql import student_data_store,pri_edu_det_fetch,add_education_details,studentdatafetch,validate_user
 
 app=Flask(__name__)
 
+CORS(app)
 @app.route('/',methods=['GET','POST'])
 def test_conn():
     return render_template('home.html')
-   
 
+
+@app.route('/fetch',methods=['GET','POST']) 
+def fetch():
+    jsondata=studentdatafetch.fetchdata()
+    return json.dumps(jsondata)
+
+
+@app.route('/pri_edu_det_fetch',methods=['GET','POST']) 
+def fetch_pri_edu_details():
+    jsondata=pri_edu_det_fetch.fetchdata()
+    return json.dumps(jsondata)
+
+@app.route('/education_details',methods=['GET','POST']) 
+def education_details():
+    data = dict(request.form)
+    print(data)
+    flag = add_education_details.education_details(data)
+    return jsonify({"result" : flag})
+
+
+@app.route('/validate',methods=['GET','POST']) 
+def validate():
+    data = dict(request.form)
+    print(data)
+    flag = validate_user.validate(data)
+    return jsonify({"result" : flag})
 
 
 @app.route('/upload',methods=['GET','POST'])
 def get_prod_info():
     data=dict(request.form)
-    
-   
+    print("data-------------")
+    print(data)
+
+
     # res=send_student_data.sendStudentData(data)
     bdb = BigchainDB('http://localhost:9984')
     alice = generate_keypair()
@@ -54,12 +82,12 @@ def get_prod_info():
 
     retrived_data = bdb.transactions.retrieve(transaction_id)
 
-    print(retrived_data['asset']['data'])
+    # print(retrived_data['asset']['data'])
 
     #transaction_id='80178ae696d5a324de29c965f4705dc46022e6dff17894391c2da1c1ac477826'
     res=get_from_db.get_from_rest(tx_id)
     
-    student_data_store.get_result(res)
+    student_data_store.get_result(res,tx_id)
 
     # Check the satus code first to know if the ID is actually valid
     try:
@@ -73,6 +101,9 @@ def get_prod_info():
             "result":"un identified token",
             'status_code':1
         })
+
+    response = "sucess"
+    return response     
 
 
     
