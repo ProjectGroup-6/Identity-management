@@ -9,9 +9,7 @@ class App extends Component{
     
     return(
       <div className="bg-img">
-            
             <Home selectList = {{selectedOption : 'Admin',options: ['Admin', 'Student']}}/> 
-           
       </div>
     )
   }

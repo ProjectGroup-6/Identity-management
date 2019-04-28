@@ -11,7 +11,7 @@ import './components/Sample.css'
 import PersonalCard1 from './components/Personal1';
 import Student1 from './components/Student1';
 
-ReactDOM.render(<App1 />, document.getElementById('root'));
+ReactDOM.render(<Student1 />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -10,17 +10,44 @@ import Library from './admin_library'
 import Transport from './admin_transport'
 import Office from './admin_office'
 import App1 from './App1'
+import App from '../App'
 
 
-class Student1 extends Component{
-    constructor() {
+import './sample1.css'
+import QRcode from'./Qrcode';
+
+
+
+
+class Student1 extends React.Component{
+    constructor(){
         super()
-        this.backClick=this.backClick.bind(this)  
-        this.personalClick=this.personalClick.bind(this)
-        this.educationalClick=this.educationalClick.bind(this)
-      }
+        this.backClick=this.backClick.bind(this)
+        this.backClick1=this.backClick.bind(this)
+        this.LibraryClick=this.LibraryClick.bind(this)
+        this.state = {
+            users: []
+        }
 
-      personalClick(event){
+     }
+
+     componentDidMount() {
+        let self = this;
+        fetch('http://localhost:5000/fetch', {
+            method: 'GET'
+        }).then(function(response) {
+            if (response.status >= 400) {
+                throw new Error("Bad response from server");
+            }
+            return response.json();
+        }).then(function(data) {
+            self.setState({users: data});
+        }).catch(err => {
+        console.log('caught it!',err);
+        })
+    }
+
+    personalClick(event){
         ReactDOM.render(<PersonalCard1/>,document.getElementById('root'))
      } 
 
@@ -51,11 +78,27 @@ class Student1 extends Component{
   
 
       backClick(event){
-        ReactDOM.render(<Sample/>,document.getElementById('root'))
+        ReactDOM.render(<App/>,document.getElementById('root'))
       }
-      render(){
-          return(
-              <div id="background">
+
+    //  handleSubmit(event) {
+    //     event.preventDefault();
+    //     const form = event.target;
+    //     const data = new FormData(form);
+        
+    //     fetch('http://localhost:5000/upload', {
+    //         method: 'POST',
+    //         body: data,
+    //     })
+    //     .then((result) => {
+    //         ReactDOM.render(<QRcode />,document.getElementById('root'))
+    //     });
+    //   }
+
+     render(){
+         return(
+             <div>
+                 <div>
                   <nav id="Color" class="navbar" role="navigation" aria-label="main navigation">
                     <div  class="navbar-menu">
                         <div class="navbar-end">
@@ -68,9 +111,7 @@ class Student1 extends Component{
                             <a class="navbar-item" onClick={this.personalClick}>
                                 Add Personal Details
                             </a>
-                            <a class="navbar-item">
-                                View Details
-                            </a>
+                            
                             <a class="navbar-item">
                                 Search Record
                             </a>
@@ -216,17 +257,17 @@ class Student1 extends Component{
                             General
                         </p> */}
                         <ul class="menu-list">
-                            <li><a  onClick={this.HomeClick}><span class="icon"><i class="fas fa-home"></i></span> Home</a></li>
+                            <li onClick={this.HomeClick}><a><span class="icon"><i class="fas fa-home"></i></span> Home</a></li>
                             <hr class="navbar-divider" />
-                            <li><a class="is-active grey" onClick={this.StudentClick}><span class="icon"><i class="fas fa-user-graduate"></i></span> Student Information</a></li>
+                            <li><a class="is-active grey"><span class="icon"><i class="fas fa-user-graduate"></i></span> Student Information</a></li>
                             <hr class="navbar-divider" />
-                            <li><a onClick={this.StaffClick}><span class="icon"><i class="fas fa-user"></i></span> Staff Information</a></li>
+                            <li onClick={this.StaffClick}><a><span class="icon" ><i class="fas fa-user"></i></span> Staff Information</a></li>
                             <hr class="navbar-divider" />
-                            <li><a onClick={this.LibraryClick}><span class="icon"><i class="fas fa-book"></i></span> Library</a></li>
+                            <li onClick={this.LibraryClick}><a><span class="icon" ><i class="fas fa-book"></i></span> Library</a></li>
                             <hr class="navbar-divider" />
-                            <li><a onClick={this.TransportClick}><span class="icon"><i class="fas fa-bus"></i></span> Transport</a></li>
+                            <li onClick={this.TransportClick}><a><span class="icon"><i class="fas fa-bus"></i></span> Transport</a></li>
                             <hr class="navbar-divider" />
-                            <li><a  onClick={this.OfficeClick}><span class="icon"><i class="fas fa-address-book"></i></span> Office</a></li>
+                            <li onClick={this.OfficeClick}><a><span class="icon"><i class="fas fa-address-book"></i></span> Office</a></li>
                             <hr class="navbar-divider" />
 
                         </ul>
@@ -250,11 +291,51 @@ class Student1 extends Component{
                      
                         </aside>
                         </div>
-              </div>
+              </div>    
 
-          );
 
-      }
+
+                 <div class="card" id="Position">
+                 <div class="field">
+                 <p class="control has-icons-right">
+                 <a class="button transparent is-medium is-danger right" onClick={this.backClick1}><span class="icon-red transparenrt is-right"><i class="fas fa-times"> </i></span></a></p>
+                 </div>
+
+                 <br></br>
+                 <h2 id="TagColor" >Student details</h2>
+                 <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>TransactionID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Student Email</th>
+                            <th>DOB</th>
+                            <th>Gender</th>
+                            <th>Father Name</th>
+                            <th>Father Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.users.map(member =>
+                        <tr key={member.txid}>
+                        <td>{member.txid} </td>
+                        <td>{member.firstname} </td>
+                        <td>{member.lastname}</td>
+                        <td>{member.studentemail}</td>
+                        <td>{member.dob}</td>
+                        <td>{member.gender}</td>
+                        <td>{member.fathername}</td>
+                        <td>{member.fatherphone}</td>
+                        </tr>
+                    )}
+                    </tbody>
+                </table>
+                  </div>
+             </div>
+         );
+     }
+   
 }
 
 export default Student1;

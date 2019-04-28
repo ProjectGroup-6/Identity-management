@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom"
-import Sample from "./Sample";
-import StudEducational from "./StudentEducational";
-import StudAttendance from "./StudentAttendance";
-import StudIAmarks from "./StudentIamarks";
-import StudOffice from "./StudentOffice";
-import StudentHome from "./StudentHome";
+import Sample from "../components/Sample";
+import StudEducational from "../student/StudentEducational";
+import StudAttendance from "../student/StudentAttendance";
+import StudIAmarks from "../student/StudentIamarks";
+import StudOffice from "../student/StudentOffice";
+import StudentHome from "../student/StudentHome";
+import App from '../App'
 
 class StudPersonal extends Component {
     constructor(){
@@ -20,7 +21,7 @@ class StudPersonal extends Component {
      }
   
      backClick(event){
-        ReactDOM.render(<Sample/>,document.getElementById('root'))
+        ReactDOM.render(<App/>,document.getElementById('root'))
       }
 
       stuhomeClick(event){
@@ -85,7 +86,7 @@ class StudPersonal extends Component {
                         </div>
                     </div>
                     </nav>
-                    <h1>personal</h1>
+                    <h1>USER ID : {sessionStorage.getItem('username')}</h1>
 
                     
                     <div id="Size">

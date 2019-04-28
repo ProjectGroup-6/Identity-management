@@ -7,14 +7,15 @@ import Staff from './admin_staff'
 import Library from './admin_library'
 import Transport from './admin_transport'
 import Office from './admin_office'
+import App from '../App'
+
 
 
 class App1 extends Component{
     constructor() {
         super()
         this.backClick=this.backClick.bind(this)  
-        this.StudentClick=this.StudentClick.bind(this)  
-
+        this.StudentClick=this.StudentClick.bind(this)
       }
 
       StudentClick(event){
@@ -38,10 +39,10 @@ class App1 extends Component{
       }
 
       backClick(event){
-        ReactDOM.render(<Sample/>,document.getElementById('root'))
+        ReactDOM.render(<App/>,document.getElementById('root'))
       }
       render(){
-          return(
+          return( 
               <div id="background">
                   <nav id="Color" class="navbar" role="navigation" aria-label="main navigation">
                     <div  class="navbar-menu">

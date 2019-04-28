@@ -4,7 +4,6 @@ import Sample from './Sample';
 import App1 from './App1'
 import Student1 from './Student1';
 import PersonalCard1 from './Personal1';
-import ViewStudentDetails from './viewstudentdetails';
 import Viewprimaryedudet from './view_primary_edu_details';
 
 class EducationaCardl extends React.Component{
@@ -40,13 +39,7 @@ class EducationaCardl extends React.Component{
       ReactDOM.render(<PersonalCard1 />,document.getElementById('root'))
      }
 
-     vieweducationdetails(event){
-        ReactDOM.render(<Viewprimaryedudet />,document.getElementById('root'))
-     }
-
-     ViewStudentDetails(event){
-      ReactDOM.render(<ViewStudentDetails />,document.getElementById('root'))
-     }  
+     
 
      backClick(event){
         ReactDOM.render(<Student1 />,document.getElementById('root'))
@@ -90,9 +83,7 @@ class EducationaCardl extends React.Component{
                                 Add Educational Details
                             </a>
                             
-                            <a class="navbar-item" onClick={this.vieweducationdetails}>
-                                View Details
-                            </a>
+                            
                             <a class="navbar-item">
                                 Search Record
                             </a>

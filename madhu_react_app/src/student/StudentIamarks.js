@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom"
-import Sample from "./Sample";
-import StudPersonal from "./StudentPersonal";
-import StudEducational from "./StudentEducational";
-import StudAttendance from "./StudentAttendance";
-import StudOffice from "./StudentOffice";
-import StudentHome from "./StudentHome";
+import Sample from "../components/Sample";
+import StudPersonal from "../student/StudentPersonal";
+import StudEducational from "../student/StudentEducational";
+import StudAttendance from "../student/StudentAttendance";
+import StudOffice from "../student/StudentOffice";
+import StudentHome from "../student/StudentHome";
+import App from '../App'
 
 class StudIAmarks extends Component {
 
@@ -21,7 +22,7 @@ class StudIAmarks extends Component {
      }
   
      backClick(event){
-        ReactDOM.render(<Sample/>,document.getElementById('root'))
+        ReactDOM.render(<App/>,document.getElementById('root'))
       }
 
       stuhomeClick(event){

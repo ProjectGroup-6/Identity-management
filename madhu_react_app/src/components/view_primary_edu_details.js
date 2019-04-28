@@ -7,6 +7,7 @@ import './Sample.css'
 import QRcode from'./Qrcode';
 import PersonalCard1 from './Personal1';
 import Educational1 from "./Educational1";
+import App from '../App'
 
 
 
@@ -49,7 +50,7 @@ class view_primary_edu_details extends React.Component{
   
      
      backClik1(event){
-        ReactDOM.render(<Sample />,document.getElementById('root'))
+        ReactDOM.render(<App />,document.getElementById('root'))
      } 
 
      backClick(event){
@@ -311,7 +312,7 @@ class view_primary_edu_details extends React.Component{
                         <td>{member.xiiboard}</td>
                         <td>{member.xiiyop}</td>
                         <td>{member.xiiper}</td>
-                        <td><a>Edit</a>|<a>Delete</a></td>
+                        
                         </tr>
                     )}
                     </tbody>

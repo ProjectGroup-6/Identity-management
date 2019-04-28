@@ -8,7 +8,6 @@ import Student1 from './Student1';
 import './Sample.css'
 import QRcode from'./Qrcode';
 import Educational1 from "./Educational1";
-import ViewStudentDetails from './viewstudentdetails';
 import Staff from './admin_staff'
 import Library from './admin_library'
 import Office from './admin_office'
@@ -47,9 +46,7 @@ class Transport extends React.Component{
         ReactDOM.render(<Office/>,document.getElementById('root'))
       }
 
-    ViewStudentDetails(event){
-        ReactDOM.render(<ViewStudentDetails />,document.getElementById('root'))
-       }
+    
 
      backClik1(event){
         ReactDOM.render(<Sample />,document.getElementById('root'))
@@ -92,9 +89,7 @@ class Transport extends React.Component{
                             <a class="navbar-item" onClick={this.personalClick}>
                                 Add Personal Details
                             </a>
-                            <a class="navbar-item" onClick={this.ViewStudentDetails}>
-                                View Details
-                            </a>
+                            
                             <a class="navbar-item">
                                 Search Record
                             </a>

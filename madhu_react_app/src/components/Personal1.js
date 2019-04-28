@@ -6,7 +6,7 @@ import Student1 from './Student1';
 import './Sample.css'
 import QRcode from'./Qrcode';
 import Educational1 from "./Educational1";
-import ViewStudentDetails from './viewstudentdetails';
+import App from '../App'
 
 class PersonalCard1 extends React.Component{
     constructor(){
@@ -21,12 +21,10 @@ class PersonalCard1 extends React.Component{
         ReactDOM.render(<Educational1 />,document.getElementById('root'))
     }
 
-    ViewStudentDetails(event){
-        ReactDOM.render(<ViewStudentDetails />,document.getElementById('root'))
-       }
+   
 
      backClik1(event){
-        ReactDOM.render(<Sample />,document.getElementById('root'))
+        ReactDOM.render(<App />,document.getElementById('root'))
      } 
 
      backClick(event){
@@ -45,7 +43,7 @@ class PersonalCard1 extends React.Component{
             body: data,
         })
         .then((result) => {
-            ReactDOM.render(<ViewStudentDetails />,document.getElementById('root'))
+            ReactDOM.render(<Student1 />,document.getElementById('root'))
             // ReactDOM.render(<QRcode />,document.getElementById('root'))
         });
       }

@@ -1,25 +1,35 @@
 import React, {Component} from "react"
 import App1 from './App1'
 import ReactDOM from 'react-dom'
-import StudHome from './StudentHome'
+import StudHome from '../student/StudentHome'
 
 class Home extends Component{
   constructor(props) {
     super(props);
     this.state = {
       selectedOption: this.props.selectList.selectedOption,
-      options: this.props.selectList.options
+      options: this.props.selectList.options,
+      username:''
     };
     
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this)
+    this.storeDetails= this.storeDetails.bind(this)
   }
 
   handleChange(event) {
     this.setState({selectedOption: event.target.value});
   }
+  storeDetails(){
+    sessionStorage.setItem('username',this.state.name)
+    console.log(sessionStorage.getItem('username'))
+  }
 
+  handleNameChange(e){
+    this.setState({name:e.target.value})
+  }
   handleSubmit(event) {
     alert('You have selected: ' + this.state.selectedOption);
     var opt = this.state.selectedOption;
@@ -74,9 +84,9 @@ class Home extends Component{
                       { this.state.options.map((option) => <option>{option}</option>)}
                     </select>
                   </div>
-                <input id='uid' name='uid' placeholder='UserID' type='text'/>
+                <input id='uid' name='uid' placeholder='UserID' type='text'value={this.state.name} onChange={this.handleNameChange}/>
                 <input id='pw' name='password' placeholder='Password' type='password'/>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary" onClick={this.storeDetails}>Submit</button>
                 {/* <a class='forgot' href='#'>Forgot your password?</a> */}
                 </form>  
               </div>

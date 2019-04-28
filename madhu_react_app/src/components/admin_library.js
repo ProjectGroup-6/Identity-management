@@ -8,7 +8,6 @@ import Student1 from './Student1';
 import './Sample.css'
 import QRcode from'./Qrcode';
 import Educational1 from "./Educational1";
-import ViewStudentDetails from './viewstudentdetails';
 import Staff from './admin_staff'
 import Transport from './admin_transport'
 import Office from './admin_office'
@@ -19,8 +18,26 @@ class Library extends React.Component{
         super()
         this.backClick=this.backClick.bind(this)
         this.backClick1=this.backClick.bind(this)
-
+        this.state = {
+            users: []
+        }
      }
+
+     componentDidMount() {
+        let self = this;
+        fetch('http://localhost:5000/library', {
+            method: 'GET'
+        }).then(function(response) {
+            if (response.status >= 400) {
+                throw new Error("Bad response from server");
+            }
+            return response.json();
+        }).then(function(data) {
+            self.setState({users: data});
+        }).catch(err => {
+        console.log('caught it!',err);
+        })
+    }
   
      
     educationalClick(event){
@@ -47,9 +64,7 @@ class Library extends React.Component{
         ReactDOM.render(<Office/>,document.getElementById('root'))
       }
 
-    ViewStudentDetails(event){
-        ReactDOM.render(<ViewStudentDetails />,document.getElementById('root'))
-       }
+    
 
      backClik1(event){
         ReactDOM.render(<Sample />,document.getElementById('root'))
@@ -92,9 +107,7 @@ class Library extends React.Component{
                             <a class="navbar-item" onClick={this.personalClick}>
                                 Add Personal Details
                             </a>
-                            <a class="navbar-item" onClick={this.ViewStudentDetails}>
-                                View Details
-                            </a>
+                            
                             <a class="navbar-item">
                                 Search Record
                             </a>
@@ -276,38 +289,41 @@ class Library extends React.Component{
                         </div>
               </div>
 
-                 {/* <div class="card" id="Position">
+                 <div class="card" id="Position">
                  <div class="field">
                  <p class="control has-icons-right">
                  <a class="button transparent is-medium is-danger right" onClick={this.backClick1}><span class="icon-red transparenrt is-right"><i class="fas fa-times"> </i></span></a></p>
                  </div>
 
                  <br></br>
-                 <h2 id="TagColor">Enter Your Personal Detalis</h2>
-                  <form method="POST" onSubmit={this.handleSubmit}>
-                        <div>
-                        <input class="input-white" name="studentid" type="text" placeholder="StudentID" /> 
-                        <input class="input-white" name="First Name" type="text" placeholder="First Name" /> 
-                        <input class="input-white" name="Last Name" type="text" placeholder="Last Name" />
-                        <input class="input-white" name="Phone No" type="text" placeholder="Phone No." /> 
-                        <input class="input-white" name="Email" type="email" placeholder="Email" />
-                        <input class="input-white" name="Date-Of-Birth" type="date" placeholder="Date-Of-Birth" />
-                        <input class="input-white" name="Gender" type="text" placeholder="Gender" />
-                        <input class="input-white" name="City" type="text" placeholder="City" /> 
-                        <input class="input-white" name="State" type="text" placeholder="State" />
-                        <input class="input-white" name="PinCode" type="text" placeholder="PinCode" />
-                        <input class="input-white" name="Father Name" type="text" placeholder="Father Name" />
-                        <input class="input-white" name="Father Email" type="text" placeholder="Email" />
-                        <input class="input-white" name="Father Phone No" type="text" placeholder="Phone No." />
-                        <input class="input-white" name="Mother Name" type="text" placeholder="Mother Name" />
-                        <input class="input-white" name="Mother Email" type="text" placeholder="Email" />
-                        <input class="input-white" name="Mother Phone No" type="text" placeholder="Phone No." />
-                        <input class="input-white" name="Current Address" type="text" placeholder="Current Address" />
-                        <input class="input-white" name="Permanenet Address" type="text" placeholder="Permanenet Address" />
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                       </div>
-                    </form> 
-                 </div> */}
+                 <h2 id="TagColor">Student details</h2>
+                 <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>BookID</th>
+                            <th>studentid</th>
+                            <th>Book Name</th>
+                            <th>Author Name</th>
+                            <th>Published Year</th>
+                            <th>Issue Date</th>
+                            <th>Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.users.map(member =>
+                        <tr key={member.txid}>
+                        <td>{member.bookid} </td>
+                        <td>{member.studentid} </td>
+                        <td>{member.bookname} </td>
+                        <td>{member.authorname}</td>
+                        <td>{member.publishedyear}</td>
+                        <td>{member.issuedate}</td>
+                        <td>{member.duedate}</td>
+                        </tr>
+                    )}
+                    </tbody>
+                </table>
+                  </div>
              </div>
          );
      }
