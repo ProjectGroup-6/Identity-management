@@ -2,9 +2,10 @@ import ReactDOM from 'react-dom'
 import React,{ Component } from 'react';
 import Sample from './Sample';
 import './App1.css'
-
 import PersonalCard1 from './Personal1'
 import EducationalCard1 from './Educational1'
+import View_pri_edu_det from './view_primary_edu_details'
+import AddBorrowDetails from '../library/addBorrowDetails'
 import Staff from './admin_staff'
 import Library from './admin_library'
 import Transport from './admin_transport'
@@ -31,6 +32,8 @@ class Student1 extends React.Component{
 
      }
 
+     
+
      componentDidMount() {
         let self = this;
         fetch('http://localhost:5000/fetch', {
@@ -53,6 +56,10 @@ class Student1 extends React.Component{
 
      HomeClick(event){
         ReactDOM.render(<App1/>,document.getElementById('root'))
+      }
+
+      view_pri_edu_detClick(event){
+        ReactDOM.render(<View_pri_edu_det/>,document.getElementById('root'))
       }
 
       StaffClick(event){
@@ -81,6 +88,12 @@ class Student1 extends React.Component{
         ReactDOM.render(<App/>,document.getElementById('root'))
       }
 
+      AddBorrowDetailsClick(event){
+        ReactDOM.render(<AddBorrowDetails/>,document.getElementById('root'))
+      }
+
+      
+
     //  handleSubmit(event) {
     //     event.preventDefault();
     //     const form = event.target;
@@ -94,7 +107,7 @@ class Student1 extends React.Component{
     //         ReactDOM.render(<QRcode />,document.getElementById('root'))
     //     });
     //   }
-
+    
      render(){
          return(
              <div>
@@ -115,9 +128,9 @@ class Student1 extends React.Component{
                             <a class="navbar-item">
                                 Search Record
                             </a>
-                            <a class="navbar-item">
+                            {/* <a class="navbar-item">
                                 Delete Record
-                            </a>
+                            </a> */}
                             </div>
                             </div>
 
@@ -131,71 +144,21 @@ class Student1 extends React.Component{
                                 Add Educational Details
                             </a>
                             
-                            <a class="navbar-item">
+                            <a class="navbar-item" onClick={this.view_pri_edu_detClick}>
                                 View Details
                             </a>
                             <a class="navbar-item">
                                 Search Record
                             </a>
-                            <a class="navbar-item">
+                            {/* <a class="navbar-item">
                                 Delete Record
-                            </a>
+                            </a> */}
                             </div>
                             </div>
 
-                            <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                            IA Marks
-                            </a>
+                            
 
-                            <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                <p>1<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>2<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>3<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>4<sup>st</sup> Year</p>
-                            </a>
-                            </div>
-                        </div>
-
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                            Attendance
-                            </a>
-
-                            <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                            <p>1<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>2<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>3<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>4<sup>st</sup> Year</p>
-                            </a>
-                            </div>
-                        </div>
+                        
 
                         <div class="navbar-item has-dropdown is-hoverable">
                             <a class="navbar-link">
@@ -203,8 +166,8 @@ class Student1 extends React.Component{
                             </a>
 
                             <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                Book Issues
+                            <a class="navbar-item" onClick={this.AddBorrowDetailsClick}>
+                                Add Borrow Details
                             </a>
                             <a class="navbar-item">
                                 Book Returns
@@ -218,30 +181,11 @@ class Student1 extends React.Component{
                             </div>
                         </div>
 
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                            Office
-                            </a>
-
-                            <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                Student Fee Records
-                            </a>
-                            <a class="navbar-item">
-                                Fee Payments
-                            </a>
-                            <a class="navbar-item">
-                                Recipts
-                            </a>
-                            <a class="navbar-item">
-                                Fee Details
-                            </a>
-                            </div>
-                        </div>
+                        
 
 
                         </div>
-                        <div class="navbar-item">
+                        <div class="navbar-item" >
                             <div class="buttons">
                             <a class="navbar-item-white" onClick={this.backClick}>
                                 <strong>Logout</strong>
@@ -264,8 +208,6 @@ class Student1 extends React.Component{
                             <li onClick={this.StaffClick}><a><span class="icon" ><i class="fas fa-user"></i></span> Staff Information</a></li>
                             <hr class="navbar-divider" />
                             <li onClick={this.LibraryClick}><a><span class="icon" ><i class="fas fa-book"></i></span> Library</a></li>
-                            <hr class="navbar-divider" />
-                            <li onClick={this.TransportClick}><a><span class="icon"><i class="fas fa-bus"></i></span> Transport</a></li>
                             <hr class="navbar-divider" />
                             <li onClick={this.OfficeClick}><a><span class="icon"><i class="fas fa-address-book"></i></span> Office</a></li>
                             <hr class="navbar-divider" />
@@ -295,7 +237,8 @@ class Student1 extends React.Component{
 
 
 
-                 <div class="card" id="Position">
+                 <div class="card" id="Position" style={{color : 'black'}}>
+                 <div id="scroll">
                  <div class="field">
                  <p class="control has-icons-right">
                  <a class="button transparent is-medium is-danger right" onClick={this.backClick1}><span class="icon-red transparenrt is-right"><i class="fas fa-times"> </i></span></a></p>
@@ -303,7 +246,9 @@ class Student1 extends React.Component{
 
                  <br></br>
                  <h2 id="TagColor" >Student details</h2>
-                 <table className="table table-hover">
+                 </div>
+                 <div>
+                 <table className="table table-hover" >
                     <thead>
                         <tr>
                             <th>TransactionID</th>
@@ -331,6 +276,7 @@ class Student1 extends React.Component{
                     )}
                     </tbody>
                 </table>
+                </div>
                   </div>
              </div>
          );

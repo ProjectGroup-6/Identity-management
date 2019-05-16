@@ -10,8 +10,10 @@ import Sample from './components/Sample';
 import './components/Sample.css'
 import PersonalCard1 from './components/Personal1';
 import Student1 from './components/Student1';
+import Qrcode from './components/Qrcode';
+import Studenthome from './student/StudentHome'
 
-ReactDOM.render(<Student1 />, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

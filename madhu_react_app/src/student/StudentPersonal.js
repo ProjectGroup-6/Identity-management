@@ -8,6 +8,7 @@ import StudOffice from "../student/StudentOffice";
 import StudentHome from "../student/StudentHome";
 import App from '../App'
 
+
 class StudPersonal extends Component {
     constructor(){
         super()
@@ -18,7 +19,43 @@ class StudPersonal extends Component {
         this.stuattendanceClick=this.stuattendanceClick.bind(this)  
         this.stuiamarksClick=this.stuiamarksClick.bind(this)  
         this.stuofficeClick=this.stuofficeClick.bind(this)  
+        this.state={
+            users : []
+        }
      }
+
+     componentDidMount() {
+        const data1 = {'studentid': sessionStorage.getItem('username')}
+        
+        fetch('http://localhost:5000/studentid_validation', {
+            method: 'POST',
+            body: data1,
+        })
+        .then(response => response.json())
+        .then(data => {
+         if(data.result==0){
+             alert("StudentID not found. Please enter proper studentid")
+         }
+         else{
+            let self = this;
+            fetch('http://localhost:5000/student_data_fetch', {
+                method: 'GET'
+            }).then(function(response) {
+                if (response.status >= 400) {
+                    throw new Error("Bad response from server");
+                }
+                return response.json();
+            }).then(function(data) {
+                self.setState({users: data});
+            }).catch(err => {
+            console.log('caught it!',err);
+            })
+         }
+       })
+    }
+
+
+    
   
      backClick(event){
         ReactDOM.render(<App/>,document.getElementById('root'))
@@ -98,15 +135,61 @@ class StudPersonal extends Component {
                             <hr class="navbar-divider" />
                             <li><a onClick={this.stueducationalClick}>Educational Information</a></li>
                             <hr class="navbar-divider" />
-                            <li><a onClick={this.stuattendanceClick}>Attendance</a></li>
+                            <li><a onClick={this.stuattendanceClick}>Library</a></li>
                             <hr class="navbar-divider" />
-                            <li><a onClick={this.stuiamarksClick}>IA Marks</a></li>
+                            <li><a onClick={this.stuiamarksClick}>Staff</a></li>
                             <hr class="navbar-divider" />
                             <li><a onClick={this.stuofficeClick}>Office</a></li>
                             <hr class="navbar-divider" />
                         </ul>
                         </aside>
                         </div>
+
+
+
+                        <div class="card" id="Position">
+                 <div class="field">
+                 <p class="control has-icons-right">
+                 <a class="button transparent is-medium is-danger right" onClick={this.backClick1}><span class="icon-red transparenrt is-right"><i class="fas fa-times"> </i></span></a></p>
+                 </div>
+
+                 <br></br>
+                 <h2 id="TagColor">Student details</h2>
+                 <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>TransactionID</th>
+                            <th>studentid</th>
+                            <th>School Name</th>
+                            <th>Board</th>
+                            <th>Year of Passing</th>
+                            <th>X-Percentage</th>
+                            <th>College Name</th>
+                            <th>Board</th>
+                            <th>Year of Passing</th>
+                            <th>XII-Percentage</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.users.map(member =>
+                        <tr key={member.txid}>
+                        <td>{member.txid} </td>
+                        <td>{member.studentid} </td>
+                        <td>{member.schoolname} </td>
+                        <td>{member.xboard}</td>
+                        <td>{member.xyop}</td>
+                        <td>{member.xper}</td>
+                        <td>{member.collegename}</td>
+                        <td>{member.xiiboard}</td>
+                        <td>{member.xiiyop}</td>
+                        <td>{member.xiiper}</td>
+                        
+                        </tr>
+                    )}
+                    </tbody>
+                </table>
+                  </div>
 
             </div>
 

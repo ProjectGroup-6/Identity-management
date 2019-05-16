@@ -103,8 +103,6 @@ class App1 extends Component{
                             <hr class="navbar-divider" />
                             <li><a onClick={this.LibraryClick}><span class="icon"><i class="fas fa-book"></i></span> Library</a></li>
                             <hr class="navbar-divider" />
-                            <li><a onClick={this.TransportClick}><span class="icon"><i class="fas fa-bus"></i></span> Transport</a></li>
-                            <hr class="navbar-divider" />
                             <li><a onClick={this.OfficeClick}><span class="icon"><i class="fas fa-address-book"></i></span> Office</a></li>
                             <hr class="navbar-divider" />
 

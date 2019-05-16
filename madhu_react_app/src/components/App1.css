@@ -1,29 +1,44 @@
 #Color{
-    position: relative;
+    position: fixed;
     margin-top: 10px;
     background: rgba(14, 13, 13); /* Fallback color */
     background: rgb(7,7,7,0.8);
   }
 
 #Size{
+    position : relative;
+    top : 80px;
     width: 280px;
     height: 1000px;
+    
     color: white;
     background-color: rgb(7, 7, 7,0.8);
+    
 }
 
+
+
+
 #Position{
-    position: absolute;
+    position: fixed;
     left: 290px;
-    top: 140px;
-    width: auto;
-    height: auto;
+    top: 73px;
+    width: 1540px;
+    height: 880px;
     background-color: rgb(17, 17, 17, 0.8);
+
     color: rgb(250, 248, 248);
     padding: 5px;
+    display: flex;
+    overflow-y : auto;
+    flex-direction: card;
 }
 
 #TagColor{
     color: rgb(250, 246, 246);
     text-align: center;
 }
+
+
+
+

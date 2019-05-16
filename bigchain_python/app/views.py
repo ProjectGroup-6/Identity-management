@@ -6,6 +6,7 @@ from bigchaindb_driver.crypto import generate_keypair
 import json,sys
 from werkzeug.utils import secure_filename
 from app.mysql import student_data_store,pri_edu_det_fetch,add_education_details,studentdatafetch,validate_user
+from app.mysql import office,library,add_borrow_details,staff_details_fetch,studentidValidate,student_details_fetch
 
 app=Flask(__name__)
 
@@ -26,6 +27,19 @@ def fetch_pri_edu_details():
     jsondata=pri_edu_det_fetch.fetchdata()
     return json.dumps(jsondata)
 
+
+@app.route('/library',methods=['GET','POST']) 
+def library_details():
+    jsondata=library.fetchdata()
+    return json.dumps(jsondata)
+
+
+@app.route('/office',methods=['GET','POST']) 
+def office_details():
+    jsondata=office.fetchdata()
+    return json.dumps(jsondata)    
+
+
 @app.route('/education_details',methods=['GET','POST']) 
 def education_details():
     data = dict(request.form)
@@ -40,6 +54,34 @@ def validate():
     print(data)
     flag = validate_user.validate(data)
     return jsonify({"result" : flag})
+
+
+@app.route('/studentid_validation',methods=['GET','POST']) 
+def validate1():
+    data = dict(request.form)
+    flag = studentidValidate.fetch(data)
+    return jsonify({"result" : flag})    
+
+
+@app.route('/upload_borrow_details',methods=['GET','POST'])
+def borrow_details():
+    data=dict(request.form)
+    print("data-------------")
+    print(data) 
+    flag = add_borrow_details.add_details(data)
+    return jsonify({"result" : flag})  
+
+
+@app.route('/staffFetch',methods=['GET','POST'])
+def fetch_details():
+    jsondata=staff_details_fetch.fetchdata()
+    return json.dumps(jsondata)
+
+
+@app.route('/student_data_fetch',methods=['GET','POST'])
+def fetch_student_details():
+    jsondata=student_details_fetch.fetchdata()
+    return json.dumps(jsondata)    
 
 
 @app.route('/upload',methods=['GET','POST'])
@@ -89,10 +131,11 @@ def get_prod_info():
     
     student_data_store.get_result(res,tx_id)
 
-    # Check the satus code first to know if the ID is actually valid
+    #Check the satus code first to know if the ID is actually valid
     try:
         return jsonify({
-            'result':res['asset']['data'],
+            'result':res['asset']['data']['studentid'],
+            'tx_id': tx_id,
             'status_code':0
             })
     # IF the satus code is 1 the hash is not valid
@@ -102,7 +145,9 @@ def get_prod_info():
             'status_code':1
         })
 
-    response = "sucess"
+    response = jsonify({"txid" : tx_id, "studentid" : res['asset']['data']['studentid']})
+    # print("********************************")
+    # print()
     return response     
 
 

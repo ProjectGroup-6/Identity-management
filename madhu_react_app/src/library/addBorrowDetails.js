@@ -1,114 +1,86 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Sample from './Sample';
-import App1 from './App1'
-import Student1 from './Student1';
-import './Sample.css'
-import QRcode from'./Qrcode';
-import PersonalCard1 from './Personal1';
-import Educational1 from "./Educational1";
+import Sample from '../components/Sample';
+import App1 from '../components/App1'
+import Student1 from '../components/Student1';
+import '../components/Sample.css'
+import QRcode from'../components/Qrcode';
+import Educational1 from "../components/Educational1";
+import Library from "../components/Library";
+import Office from "../components/admin_office";
+import Staff from "../components/admin_staff"
 import App from '../App'
-import AddBorrowDetails from '../library/addBorrowDetails'
-import Library from './admin_library'
-import Office from './admin_office'
-import Staff from './admin_staff'
 
-
-
-
-class view_primary_edu_details extends React.Component{
+class AddBorrowDetails extends React.Component{
     constructor(){
         super()
         this.backClick=this.backClick.bind(this)
         this.backClick1=this.backClick.bind(this)
-        this.state = {
-            users: []
-        }
 
      }
-
-     componentDidMount() {
-        let self = this;
-        fetch('http://localhost:5000/pri_edu_det_fetch', {
-            method: 'GET'
-        }).then(function(response) {
-            if (response.status >= 400) {
-                throw new Error("Bad response from server");
-            }
-            return response.json();
-        }).then(function(data) {
-            self.setState({users: data});
-        }).catch(err => {
-        console.log('caught it!',err);
-        })
-    }
-
-     personalClick(event){
-        ReactDOM.render(<PersonalCard1 />,document.getElementById('root'))
-    }
+  
      
     educationalClick(event){
         ReactDOM.render(<Educational1 />,document.getElementById('root'))
     }
 
-  
-     
+   
+
      backClik1(event){
         ReactDOM.render(<App />,document.getElementById('root'))
      } 
 
-     
+     backClick(event){
+        ReactDOM.render(<Student1 />,document.getElementById('root'))
+     } 
+
+
+    StudentClick(event){
+        ReactDOM.render(<Student1/>,document.getElementById('root'))
+      }
+
+      StaffClick(event){
+        ReactDOM.render(<Staff/>,document.getElementById('root'))
+      }
+
+      HomeClick(event){
+        ReactDOM.render(<App1/>,document.getElementById('root'))
+      }
 
      
-  
-       AddBorrowDetailsClick(event){
-          ReactDOM.render(<AddBorrowDetails/>,document.getElementById('root'))
-        }
-       
-  
-       backClick(event){
-          ReactDOM.render(<Student1 />,document.getElementById('root'))
-       } 
-  
-  
-  
-      StudentClick(event){
-          ReactDOM.render(<Student1/>,document.getElementById('root'))
-        }
-  
-        StaffClick(event){
-          ReactDOM.render(<Staff/>,document.getElementById('root'))
-        }
-  
-        LibraryClick(event){
-          ReactDOM.render(<Library/>,document.getElementById('root'))
-        }
-  
-        HomeClick(event){
-          ReactDOM.render(<App1/>,document.getElementById('root'))
-        }
-  
-        OfficeClick(event){
-          ReactDOM.render(<Office/>,document.getElementById('root'))
-        }
-  
+
+      OfficeClick(event){
+        ReactDOM.render(<Office/>,document.getElementById('root'))
+      }
+
+      LibraryClick(event){
+        ReactDOM.render(<Library/>,document.getElementById('root'))
+      }
+
+    
+
+
+
+
+     handleSubmit(event) {
+        event.preventDefault();
+        const form = event.target;
+        const data = new FormData(form);
         
-
-
-
-    //  handleSubmit(event) {
-    //     event.preventDefault();
-    //     const form = event.target;
-    //     const data = new FormData(form);
-        
-    //     fetch('http://localhost:5000/upload', {
-    //         method: 'POST',
-    //         body: data,
-    //     })
-    //     .then((result) => {
-    //         ReactDOM.render(<QRcode />,document.getElementById('root'))
-    //     });
-    //   }
+        fetch('http://localhost:5000/upload_borrow_details', {
+            method: 'POST',
+            body: data,
+        })
+        .then(response => response.json())
+        .then(data => {
+         if(data.result==0){
+             alert("STudentID not found. Please enter proper studentid")
+         }
+         else{
+             ReactDOM.render(<Student1 />,document.getElementById('root'))
+         }
+       })
+      }
 
      render(){
          return(
@@ -202,14 +174,14 @@ class view_primary_edu_details extends React.Component{
                         {/* <p class="menu-label">
                             General
                         </p> */}
-                            <ul class="menu-list">
+                       <ul class="menu-list">
                             <li><a onClick={this.HomeClick}><span class="icon"><i class="fas fa-home"></i></span> Home</a></li>
                             <hr class="navbar-divider" />
-                            <li><a class="is-active grey" onClick={this.StudentClick}><span class="icon"><i class="fas fa-user-graduate"></i></span> Student Information</a></li>
+                            <li><a onClick={this.StudentClick}><span class="icon"><i class="fas fa-user-graduate"></i></span> Student Information</a></li>
                             <hr class="navbar-divider" />
-                            <li><a   onClick={this.StaffClick}><span class="icon"><i class="fas fa-user"></i></span> Staff Information</a></li>
+                            <li><a onClick={this.StaffClick}><span class="icon"><i class="fas fa-user"></i></span> Staff Information</a></li>
                             <hr class="navbar-divider" />
-                            <li><a onClick={this.LibraryClick}><span class="icon"><i class="fas fa-book"></i></span> Library</a></li>
+                            <li><a  class="is-active grey" onClick={this.LibraryClick}><span class="icon"><i class="fas fa-book"></i></span> Library</a></li>
                             <hr class="navbar-divider" />
                             <li><a onClick={this.OfficeClick}><span class="icon"><i class="fas fa-address-book"></i></span> Office</a></li>
                             <hr class="navbar-divider" />
@@ -235,9 +207,7 @@ class view_primary_edu_details extends React.Component{
                      
                         </aside>
                         </div>
-              </div>    
-
-
+              </div>
 
                  <div class="card" id="Position">
                  <div class="field">
@@ -246,46 +216,24 @@ class view_primary_edu_details extends React.Component{
                  </div>
 
                  <br></br>
-                 <h2 id="TagColor">Student details</h2>
-                 <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>TransactionID</th>
-                            <th>studentid</th>
-                            <th>School Name</th>
-                            <th>Board</th>
-                            <th>Year of Passing</th>
-                            <th>X-Percentage</th>
-                            <th>College Name</th>
-                            <th>Board</th>
-                            <th>Year of Passing</th>
-                            <th>XII-Percentage</th>
-                           
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {this.state.users.map(member =>
-                        <tr key={member.txid}>
-                        <td>{member.txid} </td>
-                        <td>{member.studentid} </td>
-                        <td>{member.schoolname} </td>
-                        <td>{member.xboard}</td>
-                        <td>{member.xyop}</td>
-                        <td>{member.xper}</td>
-                        <td>{member.collegename}</td>
-                        <td>{member.xiiboard}</td>
-                        <td>{member.xiiyop}</td>
-                        <td>{member.xiiper}</td>
-                        
-                        </tr>
-                    )}
-                    </tbody>
-                </table>
-                  </div>
+                 <h2 id="TagColor">Enter Borrow Details</h2>
+                  <form method="POST" onSubmit={this.handleSubmit}>
+                        <div>
+                        <input class="input-white" name="bookid" type="text" placeholder="Book ID" /> 
+                        <input class="input-white" name="studentid" type="text" placeholder="Student ID" /> 
+                        <input class="input-white" name="bookname" type="text" placeholder="Book Name" />
+                        <input class="input-white" name="authorname" type="text" placeholder="Author Name" /> 
+                        <input class="input-white" name="publishedyear" type="text" placeholder="publishedyear" />
+                        <input class="input-white" name="issuedate" type="date" placeholder="Issue Date" />
+                        <input class="input-white" name="duedate" type="date" placeholder="Due Date" />
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                       </div>
+                    </form> 
+                 </div>
              </div>
          );
      }
    
 }
 
-export default view_primary_edu_details;
+export default AddBorrowDetails;

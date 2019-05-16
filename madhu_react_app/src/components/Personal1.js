@@ -6,14 +6,18 @@ import Student1 from './Student1';
 import './Sample.css'
 import QRcode from'./Qrcode';
 import Educational1 from "./Educational1";
+import AddBorrowDetails from '../library/addBorrowDetails'
 import App from '../App'
+import Qrcode from './Qrcode';
+var QRCode = require('qrcode.react');
+
 
 class PersonalCard1 extends React.Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props);
         this.backClick=this.backClick.bind(this)
         this.backClick1=this.backClick.bind(this)
-
+        
      }
   
      
@@ -31,6 +35,11 @@ class PersonalCard1 extends React.Component{
         ReactDOM.render(<Student1 />,document.getElementById('root'))
      } 
 
+     AddBorrowDetailsClick(event){
+        ReactDOM.render(<AddBorrowDetails/>,document.getElementById('root'))
+      }
+
+
 
 
      handleSubmit(event) {
@@ -42,17 +51,29 @@ class PersonalCard1 extends React.Component{
             method: 'POST',
             body: data,
         })
-        .then((result) => {
-            ReactDOM.render(<Student1 />,document.getElementById('root'))
-            // ReactDOM.render(<QRcode />,document.getElementById('root'))
-        });
+        .then(response => response.json())
+        .then(data => {
+         if(data.result==0){
+             alert("Details not entered. Please enter")
+         }
+         else{
+             console.log(data.tx_id);
+             var user ={
+                student_id : data.result,
+                txid: data.tx_id
+             };
+           
+             ReactDOM.render(<Student1 />,document.getElementById('root'))
+             
+         }
+       });
       }
 
      render(){
          return(
              <div>
                  <div>
-                  <nav id="Color" class="navbar" role="navigation" aria-label="main navigation">
+                 <nav id="Color" class="navbar" role="navigation" aria-label="main navigation">
                     <div  class="navbar-menu">
                         <div class="navbar-end">
                         <div class="navbar-item has-dropdown is-hoverable">
@@ -64,15 +85,13 @@ class PersonalCard1 extends React.Component{
                             <a class="navbar-item" onClick={this.personalClick}>
                                 Add Personal Details
                             </a>
-                            <a class="navbar-item" onClick={this.ViewStudentDetails}>
-                                View Details
-                            </a>
+                            
                             <a class="navbar-item">
                                 Search Record
                             </a>
-                            <a class="navbar-item">
+                            {/* <a class="navbar-item">
                                 Delete Record
-                            </a>
+                            </a> */}
                             </div>
                             </div>
 
@@ -86,71 +105,21 @@ class PersonalCard1 extends React.Component{
                                 Add Educational Details
                             </a>
                             
-                            <a class="navbar-item">
+                            <a class="navbar-item" onClick={this.view_pri_edu_detClick}>
                                 View Details
                             </a>
                             <a class="navbar-item">
                                 Search Record
                             </a>
-                            <a class="navbar-item">
+                            {/* <a class="navbar-item">
                                 Delete Record
-                            </a>
+                            </a> */}
                             </div>
                             </div>
 
-                            <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                            IA Marks
-                            </a>
+                            
 
-                            <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                <p>1<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>2<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>3<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>4<sup>st</sup> Year</p>
-                            </a>
-                            </div>
-                        </div>
-
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                            Attendance
-                            </a>
-
-                            <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                            <p>1<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>2<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>3<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>4<sup>st</sup> Year</p>
-                            </a>
-                            </div>
-                        </div>
+                        
 
                         <div class="navbar-item has-dropdown is-hoverable">
                             <a class="navbar-link">
@@ -158,8 +127,8 @@ class PersonalCard1 extends React.Component{
                             </a>
 
                             <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                Book Issues
+                            <a class="navbar-item" onClick={this.AddBorrowDetailsClick}>
+                                Add Borrow Details
                             </a>
                             <a class="navbar-item">
                                 Book Returns
@@ -173,26 +142,7 @@ class PersonalCard1 extends React.Component{
                             </div>
                         </div>
 
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                            Office
-                            </a>
-
-                            <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                Student Fee Records
-                            </a>
-                            <a class="navbar-item">
-                                Fee Payments
-                            </a>
-                            <a class="navbar-item">
-                                Recipts
-                            </a>
-                            <a class="navbar-item">
-                                Fee Details
-                            </a>
-                            </div>
-                        </div>
+                        
 
 
                         </div>
@@ -219,8 +169,6 @@ class PersonalCard1 extends React.Component{
                             <li><a><span class="icon"><i class="fas fa-user"></i></span> Staff Information</a></li>
                             <hr class="navbar-divider" />
                             <li><a><span class="icon"><i class="fas fa-book"></i></span> Library</a></li>
-                            <hr class="navbar-divider" />
-                            <li><a><span class="icon"><i class="fas fa-bus"></i></span> Transport</a></li>
                             <hr class="navbar-divider" />
                             <li><a><span class="icon"><i class="fas fa-address-book"></i></span> Office</a></li>
                             <hr class="navbar-divider" />

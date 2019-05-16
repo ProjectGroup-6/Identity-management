@@ -9,7 +9,7 @@ def send_mail(txid,firstname,email,studentid,studentphone):
    TEXT = "Thanks for registering. Your Identity is secured!!"
    student_id = "Your STUDENTID is : %s"%(studentid)
    password = "Your PASSWORD is : %s"%(studentphone)
-   message = """\From: %s\nTo: %s\nSubject: %s\n\n%s \n%s \n%s""" % ("IDM", ", ".join(email), SUBJECT, TEXT,student_id,password)
+   message = """\From: %s\nTo: %s\nSubject: %s\n\n%s \n%s \n%s""" % ("IDM",", ".join(email), SUBJECT, TEXT,student_id,password)
    server.sendmail(
     "koppresh@gmail.com", 
     email, 

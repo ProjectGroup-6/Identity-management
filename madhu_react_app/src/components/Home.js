@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import App1 from './App1'
+import Student1 from './Student1'
 import ReactDOM from 'react-dom'
 import StudHome from '../student/StudentHome'
 
@@ -45,7 +45,7 @@ class Home extends Component{
         .then(response => response.json())
         .then(data => {
          if(data.result==0){
-          ReactDOM.render(<App1 />,document.getElementById('root'))
+          ReactDOM.render(<Student1 />,document.getElementById('root'))
          }
          if(data.result==1){
             alert("Userid or Password is incorrect");

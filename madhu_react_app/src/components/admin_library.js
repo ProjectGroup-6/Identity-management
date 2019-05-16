@@ -5,13 +5,16 @@ import ReactDOM from 'react-dom'
 import Sample from './Sample';
 import App from '../App'
 import Student1 from './Student1';
-import './Sample.css'
+import './App1.css'
 import QRcode from'./Qrcode';
 import Educational1 from "./Educational1";
 import Staff from './admin_staff'
 import Transport from './admin_transport'
 import Office from './admin_office'
 import App1 from './App1'
+import AddBorrowDetails from '../library/addBorrowDetails'
+import Viewprimaryedudet from './view_primary_edu_details';
+
 
 class Library extends React.Component{
     constructor(){
@@ -56,9 +59,7 @@ class Library extends React.Component{
         ReactDOM.render(<App1/>,document.getElementById('root'))
       }
 
-      TransportClick(event){
-        ReactDOM.render(<Transport/>,document.getElementById('root'))
-      }
+     
 
       OfficeClick(event){
         ReactDOM.render(<Office/>,document.getElementById('root'))
@@ -73,6 +74,11 @@ class Library extends React.Component{
      backClick(event){
         ReactDOM.render(<App />,document.getElementById('root'))
      } 
+
+
+     AddBorrowDetailsClick(event){
+        ReactDOM.render(<AddBorrowDetails/>,document.getElementById('root'))
+      }
 
 
 
@@ -95,7 +101,7 @@ class Library extends React.Component{
          return(
              <div>
                  <div>
-                  <nav id="Color" class="navbar" role="navigation" aria-label="main navigation">
+                 <nav id="Color" class="navbar" role="navigation" aria-label="main navigation">
                     <div  class="navbar-menu">
                         <div class="navbar-end">
                         <div class="navbar-item has-dropdown is-hoverable">
@@ -111,9 +117,9 @@ class Library extends React.Component{
                             <a class="navbar-item">
                                 Search Record
                             </a>
-                            <a class="navbar-item">
+                            {/* <a class="navbar-item">
                                 Delete Record
-                            </a>
+                            </a> */}
                             </div>
                             </div>
 
@@ -127,71 +133,21 @@ class Library extends React.Component{
                                 Add Educational Details
                             </a>
                             
-                            <a class="navbar-item">
+                            <a class="navbar-item" onClick={this.view_pri_edu_detClick}>
                                 View Details
                             </a>
                             <a class="navbar-item">
                                 Search Record
                             </a>
-                            <a class="navbar-item">
+                            {/* <a class="navbar-item">
                                 Delete Record
-                            </a>
+                            </a> */}
                             </div>
                             </div>
 
-                            <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                            IA Marks
-                            </a>
+                            
 
-                            <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                <p>1<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>2<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>3<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>4<sup>st</sup> Year</p>
-                            </a>
-                            </div>
-                        </div>
-
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                            Attendance
-                            </a>
-
-                            <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                            <p>1<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>2<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>3<sup>st</sup> Year</p>
-                            </a>
-                            <hr class="navbar-divider" />
-
-                            <a class="navbar-item">
-                            <p>4<sup>st</sup> Year</p>
-                            </a>
-                            </div>
-                        </div>
+                        
 
                         <div class="navbar-item has-dropdown is-hoverable">
                             <a class="navbar-link">
@@ -199,8 +155,8 @@ class Library extends React.Component{
                             </a>
 
                             <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                Book Issues
+                            <a class="navbar-item" onClick={this.AddBorrowDetailsClick}>
+                                Add Borrow Details
                             </a>
                             <a class="navbar-item">
                                 Book Returns
@@ -214,26 +170,7 @@ class Library extends React.Component{
                             </div>
                         </div>
 
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                            Office
-                            </a>
-
-                            <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                Student Fee Records
-                            </a>
-                            <a class="navbar-item">
-                                Fee Payments
-                            </a>
-                            <a class="navbar-item">
-                                Recipts
-                            </a>
-                            <a class="navbar-item">
-                                Fee Details
-                            </a>
-                            </div>
-                        </div>
+                        
 
 
                         </div>
@@ -260,8 +197,6 @@ class Library extends React.Component{
                             <li><a onClick={this.StaffClick}><span class="icon"><i class="fas fa-user"></i></span> Staff Information</a></li>
                             <hr class="navbar-divider" />
                             <li><a  class="is-active grey" onClick={this.LibraryClick}><span class="icon"><i class="fas fa-book"></i></span> Library</a></li>
-                            <hr class="navbar-divider" />
-                            <li><a onClick={this.TransportClick}><span class="icon"><i class="fas fa-bus"></i></span> Transport</a></li>
                             <hr class="navbar-divider" />
                             <li><a onClick={this.OfficeClick}><span class="icon"><i class="fas fa-address-book"></i></span> Office</a></li>
                             <hr class="navbar-divider" />
